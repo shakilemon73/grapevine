@@ -42,30 +42,11 @@ export const ElementDefault = (): JSX.Element => {
       <main className="flex-1 flex flex-col w-full" role="main" aria-label="Main content">
         <MainContentSection />
 
+        <CorePlatformSection />
+
         <section className="bg-gray-50 py-20 lg:py-28">
           <div className="container mx-auto max-w-7xl px-6 lg:px-8">
             <div className="flex flex-col items-center gap-12">
-              <div className="text-center space-y-4 max-w-3xl">
-                <h2 className="text-4xl lg:text-5xl font-black text-gray-900">
-                  Grapevine Core Platform
-                </h2>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Grapevine brings together trip data, supplier content, and conversational AI 
-                  to deliver truly personalized, in-policy traveler experiences - all within a 
-                  secure walled garden fully integrated with your TMC systems.
-                </p>
-              </div>
-
-              <div className="w-full rounded-3xl overflow-hidden shadow-xl border border-gray-200">
-                <div className="relative aspect-video bg-gradient-to-br from-gray-100 to-gray-50">
-                  <img
-                    src="/figmaAssets/grapevine-core-platform-architecture.png"
-                    alt="Grapevine Core Platform Architecture"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-
               <MarketplaceSection />
             </div>
           </div>
@@ -111,7 +92,6 @@ export const ElementDefault = (): JSX.Element => {
         </section>
 
         <SectionWrapper />
-        <CorePlatformSection />
       </main>
 
       <footer className="bg-white border-t border-gray-200" role="contentinfo" aria-label="Footer">
