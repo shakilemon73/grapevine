@@ -1,57 +1,52 @@
 import React from "react";
+import { BarChart3, CheckCircle2, Brain, FileText } from "lucide-react";
 
 const features = [
   {
-    text: "Unified dashboards for attach rate, spend, compliance, and engagement",
-    icon: "/figmaAssets/svg-margin-3.svg",
+    icon: BarChart3,
+    text: "Unified dashboards tracking attach rate, spend, compliance, and engagement metrics in real-time",
   },
   {
-    text: "AI-generated insights on traveller behaviour and supplier performance",
-    icon: "/figmaAssets/svg-margin-1.svg",
+    icon: Brain,
+    text: "AI-generated insights revealing traveler behavior patterns and supplier performance trends",
   },
   {
-    text: "Exportable reports for duty of care, finance, and procurement",
-    icon: "/figmaAssets/svg-margin.svg",
+    icon: FileText,
+    text: "Exportable reports for duty of care, finance, and procurement with full audit trails",
   },
 ];
 
 export const ComponentNodeSection = (): JSX.Element => {
   return (
-    <section className="flex flex-col w-full items-start gap-3">
-      <header className="flex items-center gap-3 w-full">
-        <img
-          className="w-10 h-10"
-          alt="Overlay"
-          src="/figmaAssets/overlay.svg"
-        />
-
-        <div className="inline-flex items-start flex-col">
-          <h2 className="flex items-center justify-center w-fit mt-[-1.00px] [font-family:'Segoe_UI-Regular',Helvetica] font-normal text-neutral-950 text-2xl tracking-[0] leading-8 whitespace-nowrap">
-            Report
+    <section className="flex flex-col w-full max-w-[552px] items-start gap-6 p-10 rounded-3xl bg-gradient-to-br from-purple-50 to-white border border-purple-100 shadow-sm hover:shadow-lg transition-shadow duration-300">
+      <header className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-purple-100 border border-purple-200">
+          <BarChart3 className="w-7 h-7 text-purple-600" />
+        </div>
+        <div className="flex flex-col">
+          <h2 className="text-3xl font-black text-gray-900">
+            Analytics & Reporting
           </h2>
+          <p className="text-sm text-gray-600">
+            Real-time visibility that closes the loop
+          </p>
         </div>
       </header>
 
-      <div className="flex flex-col items-start w-full">
-        <p className="[font-family:'Segoe_UI-Italic',Helvetica] italic text-lg leading-7 flex items-center justify-center self-stretch mt-[-1.00px] font-normal text-slate-500 tracking-[0]">
-          Real-time visibility that closes the loop for TMCs and corporates.
-        </p>
-      </div>
-
-      <ul className="flex flex-col items-start gap-3 pt-3 pb-0 px-0 w-full">
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-start gap-3 w-full">
-            <img
-              className="w-5 h-6 flex-shrink-0"
-              alt="CheckIcon icon"
-              src={feature.icon}
-            />
-
-            <span className="flex items-center justify-center w-fit mt-[-1.00px] [font-family:'Segoe_UI-Regular',Helvetica] font-normal text-slate-500 text-base tracking-[0] leading-6 whitespace-nowrap">
-              {feature.text}
-            </span>
-          </li>
-        ))}
+      <ul className="flex flex-col items-start gap-4 w-full">
+        {features.map((feature, index) => {
+          const Icon = feature.icon;
+          return (
+            <li key={index} className="flex items-start gap-3 w-full group">
+              <div className="flex-shrink-0 w-6 h-6 mt-0.5">
+                <CheckCircle2 className="w-6 h-6 text-purple-600 group-hover:scale-110 transition-transform" />
+              </div>
+              <p className="flex-1 text-base text-gray-600 leading-relaxed">
+                {feature.text}
+              </p>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

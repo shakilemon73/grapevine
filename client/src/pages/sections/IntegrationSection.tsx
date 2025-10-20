@@ -1,4 +1,4 @@
-import { CheckIcon } from "lucide-react";
+import { Search, CheckCircle2, AlertTriangle } from "lucide-react";
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -10,55 +10,61 @@ const bulletPoints = [
     text: "Flag incomplete itineraries to trigger right-time follow-up",
   },
   {
-    text: "Detect traveller and corporate context (who they work for, where they're going, policy tier)",
+    text: "Detect traveler and corporate context (who they work for, where they're going, policy tier)",
   },
 ];
 
 export const IntegrationSection = (): JSX.Element => {
   return (
-    <section className="flex w-full items-start justify-center gap-12 relative">
-      <Card className="flex flex-col w-full max-w-[552px] min-h-[400px] items-center justify-center px-8 py-[136px] bg-[#f1f4f880] rounded-[10px] border-0">
-        <CardContent className="flex flex-col items-center gap-2 p-0">
-          <img
-            className="w-16 h-20"
-            alt="Svg margin"
-            src="/figmaAssets/svg-margin-5.svg"
-          />
-
-          <div className="flex flex-col items-center gap-2">
-            <p className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-slate-500 text-sm text-center tracking-[0] leading-5 whitespace-nowrap">
-              [Image Placeholder]
-            </p>
-
-            <p className="[font-family:'Segoe_UI-Italic',Helvetica] font-normal italic text-slate-500 text-sm text-center tracking-[0] leading-5 whitespace-nowrap">
-              Itinerary view with missing items flagged in red alert icons.
-            </p>
+    <section 
+      className="grid lg:grid-cols-2 gap-12 w-full items-center"
+      aria-labelledby="detect-heading"
+      role="region"
+    >
+      <Card className="min-h-[400px] bg-gradient-to-br from-orange-50 to-white rounded-3xl border border-orange-100 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <CardContent className="flex items-center justify-center p-12 h-full">
+          <div className="relative flex flex-col items-center gap-8">
+            <div className="w-32 h-32 rounded-2xl bg-orange-100 border border-orange-200 flex items-center justify-center relative">
+              <Search className="w-16 h-16 text-orange-600" />
+              <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-red-500 border-2 border-white flex items-center justify-center">
+                <AlertTriangle className="w-6 h-6 text-white" />
+              </div>
+            </div>
+            
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-base font-bold text-gray-900">
+                Itinerary Analysis
+              </p>
+              <p className="text-sm text-center text-gray-600 max-w-sm">
+                Intelligent detection of missing items flagged with real-time alerts
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>
 
-      <div className="flex flex-col w-full max-w-[552px] items-start gap-3">
-        <header className="flex items-center gap-3 w-full">
-          <img
-            className="w-10 h-10"
-            alt="Overlay"
-            src="/figmaAssets/overlay-3.svg"
-          />
-
-          <h2 className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-neutral-950 text-2xl tracking-[0] leading-8 whitespace-nowrap">
-            Detect
-          </h2>
+      <div className="flex flex-col gap-6">
+        <header className="flex items-center gap-4">
+          <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-orange-100 border border-orange-200">
+            <Search className="w-7 h-7 text-orange-600" aria-hidden="true" />
+          </div>
+          <div className="flex flex-col">
+            <h2 id="detect-heading" className="text-3xl font-black text-gray-900">
+              Detect
+            </h2>
+            <p className="text-sm text-gray-600">
+              Spot what's missing the moment a trip is booked
+            </p>
+          </div>
         </header>
 
-        <p className="[font-family:'Segoe_UI-Italic',Helvetica] font-normal italic text-slate-500 text-lg tracking-[0] leading-7 w-full">
-          Spot what&#39;s missing the moment a trip is booked.
-        </p>
-
-        <ul className="flex flex-col items-start gap-3 pt-3 w-full">
+        <ul className="flex flex-col gap-4" role="list">
           {bulletPoints.map((point, index) => (
-            <li key={index} className="flex items-start gap-3 w-full">
-              <CheckIcon className="w-5 h-6 text-slate-500 flex-shrink-0" />
-              <p className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-slate-500 text-base tracking-[0] leading-6 flex-1">
+            <li key={index} className="flex items-start gap-3 group">
+              <div className="flex-shrink-0 w-6 h-6 mt-0.5">
+                <CheckCircle2 className="w-6 h-6 text-orange-600 group-hover:scale-110 transition-transform" aria-hidden="true" />
+              </div>
+              <p className="text-base text-gray-600 leading-relaxed">
                 {point.text}
               </p>
             </li>

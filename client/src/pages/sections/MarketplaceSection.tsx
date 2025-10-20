@@ -1,70 +1,90 @@
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Database, User, Bot, ShoppingBag, BarChart3 } from "lucide-react";
 
 const layersData = [
   {
-    icon: "/figmaAssets/margin-1.svg",
+    icon: Database,
     title: "Data Layer",
-    description:
-      "Real-time ingestion from\nGDS, OBT, mid- and\nback-office feeds",
+    description: "Real-time ingestion from GDS, OBT, and back-office feeds",
+    color: "bg-blue-50",
+    iconColor: "text-blue-600",
+    borderColor: "border-blue-100",
   },
   {
-    icon: "/figmaAssets/margin-3.svg",
-    title: "Personalisation Layer",
-    description: "Traveller context,\npreferences, historical\nbooking data",
+    icon: User,
+    title: "Personalization Layer",
+    description: "Traveler context, preferences, and historical booking data",
+    color: "bg-purple-50",
+    iconColor: "text-purple-600",
+    borderColor: "border-purple-100",
   },
   {
-    icon: "/figmaAssets/margin-4.svg",
+    icon: Bot,
     title: "AI Layer",
-    description: "Secure, multi-channel\nand multi-modal\nassistant",
+    description: "Secure, multi-channel and multi-modal assistant",
+    color: "bg-cyan-50",
+    iconColor: "text-cyan-600",
+    borderColor: "border-cyan-100",
   },
   {
-    icon: "/figmaAssets/margin.svg",
+    icon: ShoppingBag,
     title: "Marketplace Layer",
-    description: "Hotels plus full ancillary\ninventory",
+    description: "Hotels plus full ancillary inventory",
+    color: "bg-green-50",
+    iconColor: "text-green-600",
+    borderColor: "border-green-100",
   },
   {
-    icon: "/figmaAssets/margin-2.svg",
+    icon: BarChart3,
     title: "Insight Layer",
-    description: "Dashboards, spend,\ncompliance, engagement",
+    description: "Dashboards, spend, compliance, and engagement",
+    color: "bg-orange-50",
+    iconColor: "text-orange-600",
+    borderColor: "border-orange-100",
   },
 ];
 
 export const MarketplaceSection = (): JSX.Element => {
   return (
-    <section className="flex items-center justify-center gap-3 pt-8 pb-0 px-0 w-full">
-      {layersData.map((layer, index) => (
-        <React.Fragment key={index}>
-          <Card className="flex-1 bg-white rounded-[10px] border-2 border-[#0000001a]">
-            <CardContent className="flex flex-col items-start p-[26px]">
-              <img
-                className="w-[159.19px] h-16"
-                alt={layer.title}
-                src={layer.icon}
-              />
+    <section 
+      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 w-full pt-8"
+      aria-label="Platform architecture layers"
+      role="region"
+    >
+      {layersData.map((layer, index) => {
+        const Icon = layer.icon;
+        return (
+          <article key={index} className="flex items-stretch">
+            <Card className={`flex-1 group hover:shadow-lg transition-all duration-300 rounded-3xl border ${layer.borderColor} bg-white`}>
+              <CardContent className="flex flex-col items-center text-center p-6 h-full gap-4">
+                <div className={`flex items-center justify-center w-16 h-16 rounded-2xl ${layer.color} border ${layer.borderColor} group-hover:scale-110 transition-transform`}>
+                  <Icon className={`w-8 h-8 ${layer.iconColor}`} aria-hidden="true" />
+                </div>
 
-              <div className="pt-0 pb-2 px-0 w-full flex flex-col items-start">
-                <div className="flex items-center w-full flex-col">
-                  <h3 className="flex items-center justify-center w-full [font-family:'Segoe_UI-Regular',Helvetica] font-normal text-neutral-950 text-base text-center tracking-[0] leading-6">
+                <div className="flex flex-col gap-2 flex-1">
+                  <h3 className="text-base font-bold text-gray-900">
                     {layer.title}
                   </h3>
+
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    {layer.description}
+                  </p>
                 </div>
-              </div>
 
-              <div className="flex flex-col items-center w-full">
-                <p className="[font-family:'Segoe_UI-Regular',Helvetica] text-sm text-center leading-5 flex items-center justify-center w-full font-normal text-slate-500 tracking-[0] whitespace-pre-line">
-                  {layer.description}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          {index < layersData.length - 1 && (
-            <ChevronRightIcon className="w-6 h-6 text-slate-400" />
-          )}
-        </React.Fragment>
-      ))}
+                {index < layersData.length - 1 && (
+                  <div className="absolute -right-2 top-1/2 -translate-y-1/2 hidden xl:block">
+                    <div className="w-5 h-5 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center">
+                      <ChevronRight className="w-3 h-3 text-gray-600" />
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </article>
+        );
+      })}
     </section>
   );
 };

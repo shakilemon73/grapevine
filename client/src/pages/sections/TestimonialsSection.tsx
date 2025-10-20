@@ -1,22 +1,23 @@
 import React from "react";
+import { MessageSquare, Shield, Zap, Brain, CheckCircle2 } from "lucide-react";
 
 const features = [
   {
-    icon: "/figmaAssets/svg-margin-19.svg",
+    icon: MessageSquare,
     text: "Multi-channel and multi-modal: chat or voice on SMS, WhatsApp, Slack, Teams, and email",
   },
   {
-    icon: "/figmaAssets/svg-margin-10.svg",
+    icon: Shield,
     text: "Delivers all the functionality of public LLMs within a secure walled garden, preventing data leakage",
     boldWords: ["secure walled garden"],
   },
   {
-    icon: "/figmaAssets/svg-margin-4.svg",
+    icon: Zap,
     text: "Fully integrated with booking and expense systems for seamless updates and cost savings",
   },
   {
-    icon: "/figmaAssets/svg-margin-2.svg",
-    text: 'Learns traveller preferences (e.g., "likes sushi restaurants") to provide smarter recommendations over time',
+    icon: Brain,
+    text: 'Learns traveler preferences (e.g., "likes sushi restaurants") to provide smarter recommendations over time',
   },
 ];
 
@@ -38,7 +39,7 @@ const renderTextWithBold = (text: string, boldWords?: string[]) => {
         );
       }
       parts.push(
-        <span key={key++} className="font-bold">
+        <span key={key++} className="font-bold text-gray-900">
           {boldWord}
         </span>,
       );
@@ -55,39 +56,39 @@ const renderTextWithBold = (text: string, boldWords?: string[]) => {
 
 export const TestimonialsSection = (): JSX.Element => {
   return (
-    <section className="flex flex-col w-full max-w-[552px] items-start gap-3">
-      <header className="flex items-center gap-3 w-full">
-        <img
-          className="w-10 h-10"
-          alt="Support icon"
-          src="/figmaAssets/overlay-1.svg"
-        />
-        <div className="inline-flex items-start flex-col">
-          <h2 className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-neutral-950 text-2xl tracking-[0] leading-8 whitespace-nowrap">
-            Support
+    <section 
+      className="flex flex-col w-full max-w-[552px] items-start gap-6 p-10 rounded-3xl bg-gradient-to-br from-gray-50 to-white border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300"
+      aria-labelledby="ai-support-heading"
+      role="region"
+    >
+      <header className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100">
+          <MessageSquare className="w-7 h-7 text-blue-600" aria-hidden="true" />
+        </div>
+        <div className="flex flex-col">
+          <h2 id="ai-support-heading" className="text-3xl font-black text-gray-900">
+            24/7 AI Support
           </h2>
+          <p className="text-sm text-gray-600">
+            Conversational assistance, available on any channel
+          </p>
         </div>
       </header>
 
-      <div className="flex flex-col items-start w-full">
-        <p className="[font-family:'Segoe_UI-Italic',Helvetica] font-normal italic text-slate-500 text-lg tracking-[0] leading-7">
-          24-hour conversational AI assistance, available on any channel.
-        </p>
-      </div>
-
-      <ul className="flex flex-col items-start gap-3 pt-3 w-full">
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-start gap-3 w-full">
-            <img
-              className="w-5 h-6 flex-shrink-0"
-              alt="CheckIcon icon"
-              src={feature.icon}
-            />
-            <p className="flex-1 [font-family:'Segoe_UI-Regular',Helvetica] font-normal text-slate-500 text-base tracking-[0] leading-6">
-              {renderTextWithBold(feature.text, feature.boldWords)}
-            </p>
-          </li>
-        ))}
+      <ul className="flex flex-col items-start gap-4 w-full" role="list">
+        {features.map((feature, index) => {
+          const Icon = feature.icon;
+          return (
+            <li key={index} className="flex items-start gap-3 w-full group">
+              <div className="flex-shrink-0 w-6 h-6 mt-0.5">
+                <CheckCircle2 className="w-6 h-6 text-green-600 group-hover:scale-110 transition-transform" aria-hidden="true" />
+              </div>
+              <p className="flex-1 text-base text-gray-600 leading-relaxed">
+                {renderTextWithBold(feature.text, feature.boldWords)}
+              </p>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

@@ -1,37 +1,70 @@
-import { CheckIcon } from "lucide-react";
+import { AlertCircle, Shield, TrendingUp } from "lucide-react";
 import React from "react";
 
 const bulletPoints = [
   {
-    text: "Policy adherence is harder than ever as public AI tools and consumer channels multiply.",
+    icon: AlertCircle,
+    title: "The Challenge",
+    text: "Policy adherence is harder than ever as public AI tools and consumer channels multiply outside your control.",
+    color: "text-orange-600",
+    bgColor: "bg-orange-50",
+    borderColor: "border-orange-100",
   },
   {
-    text: "Grapevine gives travellers the convenience they expect within a secure, compliant, fully integrated ecosystem.",
+    icon: Shield,
+    title: "The Solution",
+    text: "Grapevine gives travelers the convenience they expect within a secure, compliant, fully integrated ecosystem.",
+    color: "text-green-600",
+    bgColor: "bg-green-50",
+    borderColor: "border-green-100",
   },
   {
-    text: "Corporates save time and reduce cost, while TMCs increase attach revenue and strengthen loyalty.",
+    icon: TrendingUp,
+    title: "The Results",
+    text: "Corporates save time and reduce costs, while TMCs increase attach revenue and strengthen client loyalty.",
+    color: "text-blue-600",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-100",
   },
 ];
 
 export const SectionWrapper = (): JSX.Element => {
   return (
-    <section className="pl-24 pr-[448px] py-20 bg-white flex flex-col items-start w-full">
-      <div className="flex flex-col max-w-4xl items-start gap-8 w-full">
-        <header className="flex flex-col items-start w-full">
-          <h2 className="flex items-center justify-center w-full [font-family:'Segoe_UI-Regular',Helvetica] font-normal text-neutral-950 text-4xl tracking-[0] leading-10">
+    <section className="bg-white py-24 lg:py-32">
+      <div className="container mx-auto max-w-6xl px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl lg:text-6xl font-black text-gray-900 mb-6">
             Why It Matters
           </h2>
-        </header>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            The travel landscape is changing. Your solution needs to keep pace.
+          </p>
+        </div>
 
-        <div className="flex flex-col items-start gap-4 w-full">
-          {bulletPoints.map((point, index) => (
-            <div key={index} className="flex items-start gap-3 w-full">
-              <CheckIcon className="w-5 h-6 text-neutral-950 flex-shrink-0" />
-              <p className="flex items-center justify-center [font-family:'Segoe_UI-Regular',Helvetica] font-normal text-slate-500 text-lg tracking-[0] leading-7">
-                {point.text}
-              </p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-3 gap-8">
+          {bulletPoints.map((point, index) => {
+            const Icon = point.icon;
+            return (
+              <article
+                key={index}
+                className={`group relative p-10 rounded-3xl bg-white border ${point.borderColor} transition-all duration-300 hover:shadow-xl hover:-translate-y-2`}
+                role="article"
+                aria-label={point.title}
+              >
+                <div className={`w-16 h-16 rounded-2xl ${point.bgColor} border ${point.borderColor} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <Icon className={`w-8 h-8 ${point.color}`} aria-hidden="true" />
+                </div>
+                
+                <h3 className="text-2xl font-black text-gray-900 mb-4">
+                  {point.title}
+                </h3>
+                
+                <p className="text-base text-gray-600 leading-relaxed">
+                  {point.text}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

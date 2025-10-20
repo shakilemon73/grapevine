@@ -1,66 +1,61 @@
 import React from "react";
+import { Mail, TrendingUp, Award, LineChart, CheckCircle2 } from "lucide-react";
 
 const features = [
   {
-    icon: "/figmaAssets/svg-margin-13.svg",
-    text: "Send branded, personalised prompts across email, SMS, WhatsApp, Slack,\nTeams, and voice",
+    icon: Mail,
+    text: "Send branded, personalized prompts across email, SMS, WhatsApp, Slack, Teams, and voice",
   },
   {
-    icon: "/figmaAssets/svg-margin-9.svg",
-    text: "Pair traveller context with historical and corporate data to surface\nrelevant hotel and transport options",
+    icon: TrendingUp,
+    text: "Pair traveler context with historical and corporate data to surface relevant hotel and transport options",
   },
   {
-    icon: "/figmaAssets/svg-margin-6.svg",
-    text: "Highlight hotels with negotiated rates and properties previously booked\nby the traveller or their colleagues",
+    icon: Award,
+    text: "Highlight hotels with negotiated rates and properties previously booked by the traveler or their colleagues",
   },
   {
-    icon: "/figmaAssets/svg-margin-11.svg",
-    text: "Log engagement behaviour to optimise future communications",
+    icon: LineChart,
+    text: "Log engagement behavior to optimize future communications",
   },
 ];
 
 export const WhyUsSection = (): JSX.Element => {
   return (
-    <section className="flex flex-col w-full items-start gap-3">
-      <div className="flex items-center gap-3 w-full">
-        <img
-          className="w-10 h-10 flex-shrink-0"
-          alt="Overlay"
-          src="/figmaAssets/overlay-2.svg"
-        />
-
-        <div className="inline-flex items-start flex-col">
-          <h2 className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-neutral-950 text-2xl tracking-[0] leading-8">
+    <section 
+      className="flex flex-col w-full max-w-[552px] items-start gap-6 p-10 rounded-3xl bg-gradient-to-br from-green-50 to-white border border-green-100 shadow-sm hover:shadow-lg transition-shadow duration-300"
+      aria-labelledby="engage-heading"
+      role="region"
+    >
+      <header className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-green-100 border border-green-200">
+          <TrendingUp className="w-7 h-7 text-green-600" aria-hidden="true" />
+        </div>
+        <div className="flex flex-col">
+          <h2 id="engage-heading" className="text-3xl font-black text-gray-900">
             Engage
           </h2>
+          <p className="text-sm text-gray-600">
+            Right-time, right-channel messages that drive in-policy bookings
+          </p>
         </div>
-      </div>
+      </header>
 
-      <div className="flex flex-col items-start w-full">
-        <p className="[font-family:'Segoe_UI-Italic',Helvetica] font-normal italic text-slate-500 text-lg tracking-[0] leading-7">
-          Right-time, right-channel messages that drive in-policy bookings
-          <br />
-          automatically.
-        </p>
-      </div>
-
-      <div className="flex flex-col items-start gap-3 pt-3 w-full">
-        {features.map((feature, index) => (
-          <div key={index} className="flex items-start gap-3 w-full">
-            <img
-              className="w-5 h-6 flex-shrink-0"
-              alt="Feature icon"
-              src={feature.icon}
-            />
-
-            <div className="flex-1">
-              <p className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-slate-500 text-base tracking-[0] leading-6 whitespace-pre-line">
+      <ul className="flex flex-col items-start gap-4 w-full" role="list">
+        {features.map((feature, index) => {
+          const Icon = feature.icon;
+          return (
+            <li key={index} className="flex items-start gap-3 w-full group">
+              <div className="flex-shrink-0 w-6 h-6 mt-0.5">
+                <CheckCircle2 className="w-6 h-6 text-green-600 group-hover:scale-110 transition-transform" aria-hidden="true" />
+              </div>
+              <p className="flex-1 text-base text-gray-600 leading-relaxed">
                 {feature.text}
               </p>
-            </div>
-          </div>
-        ))}
-      </div>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 };

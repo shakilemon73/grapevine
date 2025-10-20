@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind components;
 @tailwind utilities;
 
@@ -120,69 +122,76 @@
 
 @layer base {
   :root {
+    /* Modern calm business-tech palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
+    --foreground: 222 20% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Soft slate neutrals */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 45%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 222 20% 15%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
 
-    --card: transparent;
-    --card-foreground: 222.2 47.4% 11.2%;
+    /* Subtle card with glassmorphism support */
+    --card: 0 0% 100%;
+    --card-foreground: 222 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Deep navy primary */
+    --primary: 222 47% 11%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Subtle secondary */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 20% 15%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Electric blue accent */
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --ring: 215 20.2% 65.1%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
+    /* Dark mode with deep backgrounds */
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
 
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
+    --muted: 222 30% 12%;
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 216 34% 17%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 215 20.2% 65.1%;
+    --popover: 222 47% 6%;
+    --popover-foreground: 210 40% 98%;
 
-    --border: 216 34% 17%;
-    --input: 216 34% 17%;
+    --border: 222 30% 15%;
+    --input: 222 30% 15%;
 
-    --card: transparent;
-    --card-foreground: 213 31% 91%;
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
+    --primary-foreground: 222 47% 11%;
 
-    --secondary: 222.2 47.4% 11.2%;
+    --secondary: 222 30% 12%;
     --secondary-foreground: 210 40% 98%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --ring: 216 34% 17%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 }
 
@@ -193,6 +202,127 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  p {
+    line-height: 1.7;
+    max-width: 65ch;
+  }
+
+  /* Don Norman - Signifiers & Affordances */
+  button, a, [role="button"] {
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  button:disabled, [aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* Farai Madzima - Accessibility & Inclusive Design */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Luke Wroblewski - Touch Targets (minimum 44px) */
+  button, a[role="button"], input[type="button"], input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Alan Cooper - Error Prevention */
+  input:invalid:not(:placeholder-shown) {
+    border-color: hsl(var(--destructive));
+  }
+
+  input:valid:not(:placeholder-shown) {
+    border-color: hsl(142 76% 36%);
+  }
+
+  /* Susan Weinschenk - Reduce Cognitive Load */
+  ::selection {
+    background-color: hsl(var(--accent) / 0.2);
+    color: hsl(var(--foreground));
+  }
+
+  /* Aarron Walter - Smooth Micro-interactions */
+  @media (prefers-reduced-motion: no-preference) {
+    * {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Respect user preferences for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Julie Zhuo - 8px Grid System */
+@layer utilities {
+  .spacing-system {
+    /* 8px grid spacing utilities */
+    --spacing-1: 0.5rem;   /* 8px */
+    --spacing-2: 1rem;     /* 16px */
+    --spacing-3: 1.5rem;   /* 24px */
+    --spacing-4: 2rem;     /* 32px */
+    --spacing-5: 2.5rem;   /* 40px */
+    --spacing-6: 3rem;     /* 48px */
+    --spacing-8: 4rem;     /* 64px */
+    --spacing-10: 5rem;    /* 80px */
+    --spacing-12: 6rem;    /* 96px */
+  }
+
+  /* Steve Krug - Scannability */
+  .scannable-text {
+    max-width: 15ch;
+    font-weight: 600;
+  }
+
+  /* Jonathan Ive - Generous Whitespace */
+  .whitespace-generous {
+    padding: var(--spacing-6);
+    margin: var(--spacing-4) 0;
+  }
+
+  /* Dieter Rams - Minimal & Clear */
+  .minimal-ui {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
   }
 }

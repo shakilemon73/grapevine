@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
 
 const navigationItems = [
   { label: "TMCs", active: false },
@@ -12,30 +13,49 @@ const navigationItems = [
 
 export const HeaderSection = (): JSX.Element => {
   return (
-    <header className="flex flex-col w-full items-start pt-4 pb-[17px] px-24 bg-white border-b border-[#0000001a]">
-      <div className="flex items-center justify-between max-w-screen-xl w-full h-9">
-        <div className="flex items-center pt-[3px] pb-0 px-0">
-          <div className="w-[124.89px] h-8 bg-[url(/figmaAssets/grapevine-1.png)] bg-cover bg-[50%_50%]" />
-        </div>
+    <header 
+      className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-xl border-b border-gray-200 shadow-sm"
+      role="banner"
+      aria-label="Main navigation"
+    >
+      <div className="container mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          <a 
+            href="#" 
+            className="flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1 -m-1"
+            aria-label="Grapevine home"
+          >
+            <div className="flex items-center gap-2 font-bold text-2xl">
+              <Sparkles className="w-7 h-7 text-blue-600 group-hover:scale-110 transition-transform" />
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                Grapevine
+              </span>
+            </div>
+          </a>
 
-        <nav className="flex items-center gap-6">
-          {navigationItems.map((item, index) => (
-            <button
-              key={index}
-              className={`flex items-center justify-center w-fit mt-[-1.00px] [font-family:'Segoe_UI-Regular',Helvetica] font-normal text-base tracking-[0] leading-6 whitespace-nowrap ${
-                item.active ? "text-indigo-500" : "text-slate-500"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
+          <nav className="hidden md:flex items-center gap-8" role="navigation" aria-label="Primary">
+            {navigationItems.map((item, index) => (
+              <a
+                key={index}
+                href={`#${item.label.toLowerCase()}`}
+                className={`font-semibold text-sm transition-all hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-3 py-2 ${
+                  item.active ? "text-gray-900" : "text-gray-500"
+                }`}
+                aria-current={item.active ? "page" : undefined}
+                aria-label={`Navigate to ${item.label}`}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
 
-        <Button className="h-9 pt-[7.5px] pb-[8.5px] px-4 bg-indigo-500 hover:bg-indigo-600 rounded-lg">
-          <span className="flex items-center justify-center w-fit mt-[-1.00px] [font-family:'Segoe_UI-Semibold',Helvetica] font-normal text-white text-sm text-center tracking-[0] leading-5 whitespace-nowrap">
+          <Button 
+            className="h-12 px-8 bg-gray-900 hover:bg-gray-800 text-white rounded-2xl font-bold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
+            aria-label="Schedule a demo with our team"
+          >
             Book a Demo
-          </span>
-        </Button>
+          </Button>
+        </div>
       </div>
     </header>
   );

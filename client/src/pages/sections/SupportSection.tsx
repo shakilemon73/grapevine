@@ -1,12 +1,13 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { ShoppingBag, CheckCircle2, ArrowRightLeft, Building2 } from "lucide-react";
 
 const features = [
   {
     text: "Pulls live, bookable content from trusted suppliers into the assistant",
   },
   {
-    text: "Presents options aligned with traveller preferences and company policy",
+    text: "Presents options aligned with traveler preferences and company policy",
   },
   {
     text: "Routes every ancillary booking back through TMC systems for full visibility and control",
@@ -15,61 +16,58 @@ const features = [
 
 export const SupportSection = (): JSX.Element => {
   return (
-    <section className="flex items-start justify-center gap-12 w-full">
-      <Card className="w-[552px] min-h-[500px] bg-slate-100 rounded-[10px] border-0">
-        <CardContent className="flex items-center justify-center px-12 py-[108px] h-full">
-          <div className="relative w-full max-w-[456px] h-[284px]">
-            <img
-              className="absolute w-full top-0 left-0 h-48"
-              alt="Container"
-              src="/figmaAssets/container.svg"
-            />
-
-            <div className="flex flex-col w-full items-center absolute top-[216px] left-0">
-              <p className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-slate-500 text-sm text-center tracking-[0] leading-5 whitespace-nowrap">
-                [Image Placeholder]
-              </p>
+    <section 
+      className="grid lg:grid-cols-2 gap-12 w-full items-center"
+      aria-labelledby="marketplace-heading"
+      role="region"
+    >
+      <Card className="min-h-[400px] bg-gradient-to-br from-blue-50 to-white rounded-3xl border border-blue-100 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <CardContent className="flex items-center justify-center p-12 h-full">
+          <div className="relative flex flex-col items-center gap-8">
+            <div className="grid grid-cols-3 gap-4">
+              {[ShoppingBag, Building2, ArrowRightLeft].map((Icon, i) => (
+                <div
+                  key={i}
+                  className="w-20 h-20 rounded-2xl bg-blue-100 border border-blue-200 flex items-center justify-center hover:scale-110 transition-transform"
+                >
+                  <Icon className="w-10 h-10 text-blue-600" />
+                </div>
+              ))}
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-blue-300 to-transparent"></div>
+              <div className="w-12 h-12 rounded-full bg-blue-100 border-2 border-blue-600 flex items-center justify-center">
+                <ArrowRightLeft className="w-6 h-6 text-blue-600" />
+              </div>
+              <div className="h-px w-16 bg-gradient-to-r from-blue-300 via-transparent to-transparent"></div>
             </div>
 
-            <div className="flex flex-col w-full items-center absolute top-[244px] left-0">
-              <p className="[font-family:'Segoe_UI-Italic',Helvetica] font-normal italic text-slate-500 text-sm text-center tracking-[0] leading-5">
-                Visual mosaic of ancillary tiles funneling into a chat
-                interface, then flowing
-                <br />
-                back out to TMC and corporate systems - forming a closed data
-                loop.
-              </p>
-            </div>
+            <p className="text-sm text-center text-gray-600 max-w-md">
+              Visual representation of ancillary services flowing through the chat interface, 
+              then seamlessly syncing back to TMC and corporate systems
+            </p>
           </div>
         </CardContent>
       </Card>
 
-      <div className="flex flex-col w-[552px] items-start gap-6">
-        <div className="flex items-start self-stretch w-full flex-col">
-          <h2 className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-neutral-950 text-2xl tracking-[0] leading-8">
-            Everything a traveller needs, connected through
-            <br />
-            one secure ecosystem.
-          </h2>
-        </div>
+      <div className="flex flex-col gap-6">
+        <h2 id="marketplace-heading" className="text-3xl lg:text-4xl font-black text-gray-900 leading-tight">
+          Everything a Traveler Needs, Connected Through One Secure Ecosystem
+        </h2>
 
-        <div className="flex flex-col items-start gap-4 self-stretch w-full">
+        <ul className="flex flex-col gap-4" role="list">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="flex items-start gap-3 self-stretch w-full"
-            >
-              <img
-                className="w-5 h-6 flex-shrink-0"
-                alt="Checkmark"
-                src="/figmaAssets/svg-margin-12.svg"
-              />
-              <p className="[font-family:'Segoe_UI-Regular',Helvetica] font-normal text-slate-500 text-base tracking-[0] leading-6 flex-1">
+            <li key={index} className="flex items-start gap-3 group">
+              <div className="flex-shrink-0 w-6 h-6 mt-0.5">
+                <CheckCircle2 className="w-6 h-6 text-blue-600 group-hover:scale-110 transition-transform" aria-hidden="true" />
+              </div>
+              <p className="text-base text-gray-600 leading-relaxed">
                 {feature.text}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
