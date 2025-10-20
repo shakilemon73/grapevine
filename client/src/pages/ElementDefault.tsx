@@ -43,7 +43,7 @@ export const ElementDefault = (): JSX.Element => {
       <main className="flex-1 flex flex-col w-full" role="main" aria-label="Main content">
         <MainContentSection />
 
-        <WorkflowDiagram />
+        <CorePlatformSection />
 
         <section className="bg-gray-50 py-20 lg:py-28">
           <div className="container mx-auto max-w-7xl px-6 lg:px-8">
