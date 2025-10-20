@@ -2,7 +2,8 @@ import { useState } from "react";
 import { 
   Database, Zap, MessageSquare, ArrowRight, Filter, Cloud, Shield,
   Plane, Hotel, Car, MapPin, CreditCard, Clock, Users, BarChart3, 
-  Mail, Phone, Video, Bell, Globe, Building2, Brain, TrendingUp
+  Mail, Phone, Video, Bell, Globe, Building2, Brain, TrendingUp,
+  Mic, FileText, LineChart, AlertCircle
 } from "lucide-react";
 import { 
   SiSlack, SiGmail, SiWhatsapp, SiExpedia, SiUber, SiSalesforce,
@@ -35,16 +36,16 @@ const WorkflowNode = ({ icon: Icon, title, subtitle, color, iconColor, delay = 0
       <div 
         className={`absolute inset-0 ${color} rounded-2xl blur-xl transition-opacity duration-500 ${isHovered ? 'opacity-40' : 'opacity-20'}`}
       ></div>
-      <div className="relative bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-5 hover:border-slate-500/70 transition-all duration-300 hover:scale-105 min-h-[130px] flex flex-col items-center justify-center text-center">
-        <div className={`w-12 h-12 rounded-xl ${color.replace('bg-', 'bg-')}/10 border border-${color.split('-')[1]}-500/30 flex items-center justify-center mb-2.5 transition-transform duration-300 ${isHovered ? 'scale-110 rotate-3' : ''}`}>
+      <div className="relative bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4 hover:border-slate-500/70 transition-all duration-300 hover:scale-105 min-h-[120px] flex flex-col items-center justify-center text-center">
+        <div className={`w-11 h-11 rounded-xl ${color.replace('bg-', 'bg-')}/10 border border-${color.split('-')[1]}-500/30 flex items-center justify-center mb-2 transition-transform duration-300 ${isHovered ? 'scale-110 rotate-3' : ''}`}>
           {brandIcon ? (
-            <Icon className="w-6 h-6" style={iconColor ? { color: iconColor } : {}} />
+            <Icon className="w-5 h-5" style={iconColor ? { color: iconColor } : {}} />
           ) : (
-            <Icon className={`w-6 h-6 ${iconColor || 'text-slate-300'}`} />
+            <Icon className={`w-5 h-5 ${iconColor || 'text-slate-300'}`} />
           )}
         </div>
-        <h4 className="text-xs font-bold text-white mb-1">{title}</h4>
-        {subtitle && <p className="text-[10px] text-slate-400">{subtitle}</p>}
+        <h4 className="text-[11px] font-bold text-white mb-0.5 leading-tight">{title}</h4>
+        {subtitle && <p className="text-[9px] text-slate-400 leading-tight">{subtitle}</p>}
       </div>
     </div>
   );
@@ -84,6 +85,41 @@ const ConnectionLine = ({ direction = 'horizontal', animated = true }: Connectio
         )}
       </div>
       <ArrowRight className="w-4 h-4 text-amber-400 ml-1.5" />
+    </div>
+  );
+};
+
+interface DataGroupProps {
+  title: string;
+  nodes: Array<{
+    icon: any;
+    title: string;
+    subtitle?: string;
+    iconColor?: string;
+    brandIcon?: boolean;
+  }>;
+  color: string;
+  delay: number;
+}
+
+const DataGroup = ({ title, nodes, color, delay }: DataGroupProps) => {
+  return (
+    <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4">
+      <h4 className="text-xs font-bold text-slate-300 mb-3 text-center">{title}</h4>
+      <div className={`grid ${nodes.length <= 3 ? 'grid-cols-3' : nodes.length <= 4 ? 'grid-cols-2' : 'grid-cols-3'} gap-2`}>
+        {nodes.map((node, idx) => (
+          <WorkflowNode 
+            key={idx}
+            icon={node.icon}
+            title={node.title}
+            subtitle={node.subtitle}
+            color={color}
+            iconColor={node.iconColor}
+            brandIcon={node.brandIcon}
+            delay={delay + (idx * 50)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -135,7 +171,7 @@ export const CorePlatformSection = (): JSX.Element => {
       <div className="absolute top-20 left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       
-      <div className="container mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto max-w-[1600px] px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-500/10 backdrop-blur-sm border border-blue-500/20 mb-6">
@@ -145,7 +181,7 @@ export const CorePlatformSection = (): JSX.Element => {
           <h2 id="platform-heading" className="text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-purple-100 mb-4">
             Grapevine Core Platform
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-slate-400 max-w-4xl mx-auto leading-relaxed">
             Unified data integration hub connecting 65+ travel systems with AI-powered personalization 
             and omni-channel delivery for seamless, compliant travel experiences.
           </p>
@@ -158,18 +194,101 @@ export const CorePlatformSection = (): JSX.Element => {
             <div className="text-center mb-5">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30">
                 <span className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-xs font-bold text-white">1</span>
-                <span className="text-sm font-semibold text-emerald-300">Data Sources</span>
+                <span className="text-sm font-semibold text-emerald-300">Customer Data & Supplier Data Sources</span>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-              <WorkflowNode icon={Plane} title="Sabre" subtitle="GDS Data" color="bg-emerald-500" delay={50} />
-              <WorkflowNode icon={Plane} title="Amadeus" subtitle="GDS Data" color="bg-emerald-500" delay={100} />
-              <WorkflowNode icon={SiSalesforce} title="Salesforce" subtitle="CRM" color="bg-emerald-500" iconColor="#00A1E0" delay={150} brandIcon />
-              <WorkflowNode icon={SiSap} title="SAP Concur" subtitle="OBT" color="bg-emerald-500" iconColor="#0FAAFF" delay={200} brandIcon />
-              <WorkflowNode icon={SiExpedia} title="Expedia" subtitle="Hotels" color="bg-emerald-500" iconColor="#FFCB08" delay={250} brandIcon />
-              <WorkflowNode icon={SiMarriott} title="Marriott" subtitle="Hotels" color="bg-emerald-500" iconColor="#A4122D" delay={300} brandIcon />
-              <WorkflowNode icon={SiStripe} title="Stripe" subtitle="Payments" color="bg-emerald-500" iconColor="#635BFF" delay={350} brandIcon />
-              <WorkflowNode icon={SiUber} title="Uber" subtitle="Transport" color="bg-emerald-500" iconColor="#000000" delay={400} brandIcon />
+            
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Customer Data Column */}
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 mb-4">
+                    <Database className="w-3.5 h-3.5 text-emerald-300" />
+                    <span className="text-xs font-bold text-emerald-200">Customer Data</span>
+                  </div>
+                </div>
+
+                <DataGroup 
+                  title="GDS Booking Data"
+                  color="bg-emerald-500"
+                  delay={0}
+                  nodes={[
+                    { icon: Plane, title: "Sabre", subtitle: "GDS" },
+                    { icon: Plane, title: "Amadeus", subtitle: "GDS" },
+                    { icon: Plane, title: "Travelport", subtitle: "GDS" }
+                  ]}
+                />
+
+                <DataGroup 
+                  title="Custom & OBT APIs"
+                  color="bg-emerald-500"
+                  delay={150}
+                  nodes={[
+                    { icon: Building2, title: "Atriis", subtitle: "OBT" },
+                    { icon: SiSap, title: "Concur", subtitle: "SAP", iconColor: "#0FAAFF", brandIcon: true },
+                    { icon: Building2, title: "Cytric", subtitle: "Travel" },
+                    { icon: Building2, title: "Deem", subtitle: "OBT" }
+                  ]}
+                />
+
+                <DataGroup 
+                  title="Back-Office Exports"
+                  color="bg-emerald-500"
+                  delay={300}
+                  nodes={[
+                    { icon: SiSalesforce, title: "CRM Systems", subtitle: "Salesforce", iconColor: "#00A1E0", brandIcon: true },
+                    { icon: Database, title: "Mid/Back Office", subtitle: "ERP" },
+                    { icon: Database, title: "Booking Systems", subtitle: "Reservations" }
+                  ]}
+                />
+              </div>
+
+              {/* Supplier Data Column */}
+              <div className="space-y-4" data-testid="supplier-data-section">
+                <div className="text-center">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/30 mb-4">
+                    <Building2 className="w-3.5 h-3.5 text-amber-300" />
+                    <span className="text-xs font-bold text-amber-200">Supplier Data</span>
+                  </div>
+                </div>
+
+                <DataGroup 
+                  title="Hotel Inventory"
+                  color="bg-amber-500"
+                  delay={0}
+                  nodes={[
+                    { icon: SiExpedia, title: "Expedia", subtitle: "Hotels", iconColor: "#FFCB08", brandIcon: true },
+                    { icon: Hotel, title: "Booking.com", subtitle: "Accommodation" },
+                    { icon: Plane, title: "Sabre", subtitle: "GDS" },
+                    { icon: Plane, title: "Amadeus", subtitle: "GDS" },
+                    { icon: Plane, title: "Travelport", subtitle: "GDS" },
+                    { icon: Hotel, title: "Other", subtitle: "Providers" }
+                  ]}
+                />
+
+                <DataGroup 
+                  title="Trip Inventory"
+                  color="bg-amber-500"
+                  delay={150}
+                  nodes={[
+                    { icon: MapPin, title: "Journey", subtitle: "Travel" },
+                    { icon: MapPin, title: "CAVU", subtitle: "Experiences" },
+                    { icon: MapPin, title: "Lonely Planet", subtitle: "Destinations" }
+                  ]}
+                />
+
+                <DataGroup 
+                  title="Destination Inventory"
+                  color="bg-amber-500"
+                  delay={300}
+                  nodes={[
+                    { icon: MapPin, title: "OpenTable", subtitle: "Dining" },
+                    { icon: MapPin, title: "Yelp", subtitle: "Local" },
+                    { icon: Plane, title: "FlightAware", subtitle: "Aviation" },
+                    { icon: Globe, title: "Immersion", subtitle: "Activities" }
+                  ]}
+                />
+              </div>
             </div>
           </div>
 
@@ -186,14 +305,14 @@ export const CorePlatformSection = (): JSX.Element => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
               <WorkflowNode 
                 icon={Filter} 
-                title="Customer Data Normalization" 
+                title="Customer Normalization & Validation" 
                 subtitle="Real-time validation & enrichment" 
                 color="bg-purple-500" 
                 delay={500}
               />
               <WorkflowNode 
                 icon={Database} 
-                title="Content Normalization" 
+                title="Content Normalization & Validation" 
                 subtitle="Unified schema mapping" 
                 color="bg-purple-500" 
                 delay={550}
@@ -220,30 +339,20 @@ export const CorePlatformSection = (): JSX.Element => {
                       <Zap className="w-8 h-8 text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-black text-white">Grapevine Core Platform</h3>
-                      <p className="text-sm text-blue-200">Real-Time AI Processing Engine</p>
+                      <h3 className="text-2xl font-black text-white">Core Platform</h3>
+                      <p className="text-sm text-blue-200">Real-Time Processing</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <div className="bg-slate-800/50 rounded-xl p-4 border border-blue-500/30 hover:border-blue-500/50 transition-all">
                       <Cloud className="w-6 h-6 text-blue-400 mb-2" />
-                      <h4 className="text-sm font-bold text-white mb-1">Real-Time CDP</h4>
-                      <p className="text-xs text-slate-400">Customer profiles</p>
+                      <h4 className="text-sm font-bold text-white mb-1">Real-Time, Zero-Trust CDP</h4>
+                      <p className="text-xs text-slate-400">Customer data platform</p>
                     </div>
                     <div className="bg-slate-800/50 rounded-xl p-4 border border-purple-500/30 hover:border-purple-500/50 transition-all">
                       <Brain className="w-6 h-6 text-purple-400 mb-2" />
-                      <h4 className="text-sm font-bold text-white mb-1">AI Personalization</h4>
-                      <p className="text-xs text-slate-400">Smart recommendations</p>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-xl p-4 border border-cyan-500/30 hover:border-cyan-500/50 transition-all">
-                      <Shield className="w-6 h-6 text-cyan-400 mb-2" />
-                      <h4 className="text-sm font-bold text-white mb-1">Policy Engine</h4>
-                      <p className="text-xs text-slate-400">Compliance rules</p>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-xl p-4 border border-emerald-500/30 hover:border-emerald-500/50 transition-all">
-                      <BarChart3 className="w-6 h-6 text-emerald-400 mb-2" />
-                      <h4 className="text-sm font-bold text-white mb-1">Analytics</h4>
-                      <p className="text-xs text-slate-400">Insights & trends</p>
+                      <h4 className="text-sm font-bold text-white mb-1">Personalisation Layer</h4>
+                      <p className="text-xs text-slate-400">AI-powered recommendations</p>
                     </div>
                   </div>
                 </div>
@@ -253,21 +362,66 @@ export const CorePlatformSection = (): JSX.Element => {
 
           <ConnectionLine direction="vertical" />
 
-          {/* Step 4: Delivery Channels */}
+          {/* Step 4: Delivery & Analytics */}
           <div className="animate-fade-in-up" style={{ animationDelay: '750ms' }}>
             <div className="text-center mb-5">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30">
                 <span className="w-6 h-6 rounded-full bg-cyan-500 flex items-center justify-center text-xs font-bold text-white">4</span>
-                <span className="text-sm font-semibold text-cyan-300">Omni-Channel Delivery</span>
+                <span className="text-sm font-semibold text-cyan-300">Omni-Channel Delivery & Insights</span>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-              <WorkflowNode icon={Globe} title="Web Portal" subtitle="Desktop & Mobile" color="bg-cyan-500" delay={800} data-testid="channel-web portal" />
-              <WorkflowNode icon={SiGmail} title="Email" subtitle="Gmail, Outlook" color="bg-cyan-500" iconColor="#EA4335" delay={850} brandIcon />
-              <WorkflowNode icon={Phone} title="SMS" subtitle="Text Messages" color="bg-cyan-500" delay={900} data-testid="channel-sms" />
-              <WorkflowNode icon={SiWhatsapp} title="WhatsApp" subtitle="Messaging" color="bg-cyan-500" iconColor="#25D366" delay={950} brandIcon />
-              <WorkflowNode icon={Bell} title="Push Notify" subtitle="Alerts" color="bg-cyan-500" delay={1000} />
-              <WorkflowNode icon={SiSlack} title="Slack" subtitle="Team Chat" color="bg-cyan-500" iconColor="#4A154B" delay={1050} brandIcon data-testid="channel-slack" />
+            
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Omni-Channel Experience Column */}
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-400/30 mb-4">
+                    <MessageSquare className="w-3.5 h-3.5 text-cyan-300" />
+                    <span className="text-xs font-bold text-cyan-200">Omni-Channel Experience</span>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4">
+                  <h4 className="text-xs font-bold text-slate-300 mb-3 text-center">Conversational AI</h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    <WorkflowNode icon={SiSlack} title="Slack" subtitle="Team Chat" color="bg-cyan-500" iconColor="#4A154B" delay={800} brandIcon data-testid="channel-slack" />
+                    <WorkflowNode icon={MessageSquare} title="MS Teams" subtitle="Collaboration" color="bg-cyan-500" delay={850} />
+                  </div>
+                </div>
+
+                <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4">
+                  <h4 className="text-xs font-bold text-slate-300 mb-3 text-center">Voice AI</h4>
+                  <div className="grid grid-cols-1 gap-2">
+                    <WorkflowNode icon={Mic} title="Voice Assistant" subtitle="Natural language interaction" color="bg-cyan-500" delay={900} />
+                  </div>
+                </div>
+
+                <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4">
+                  <h4 className="text-xs font-bold text-slate-300 mb-3 text-center">Digital Channels</h4>
+                  <div className="grid grid-cols-3 gap-2">
+                    <WorkflowNode icon={SiGmail} title="Email" subtitle="Gmail" color="bg-cyan-500" iconColor="#EA4335" delay={950} brandIcon />
+                    <WorkflowNode icon={Phone} title="SMS" subtitle="Text" color="bg-cyan-500" delay={1000} data-testid="channel-sms" />
+                    <WorkflowNode icon={SiWhatsapp} title="WhatsApp" subtitle="Chat" color="bg-cyan-500" iconColor="#25D366" delay={1050} brandIcon />
+                  </div>
+                </div>
+              </div>
+
+              {/* Reporting & Insights Column */}
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 mb-4">
+                    <BarChart3 className="w-3.5 h-3.5 text-indigo-300" />
+                    <span className="text-xs font-bold text-indigo-200">Reporting & Insights</span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <WorkflowNode icon={LineChart} title="Performance Analytics" subtitle="KPIs & metrics tracking" color="bg-indigo-500" delay={800} />
+                  <WorkflowNode icon={Users} title="Customer Insights" subtitle="Behavior analysis" color="bg-indigo-500" delay={850} />
+                  <WorkflowNode icon={TrendingUp} title="Predictive Models" subtitle="AI forecasting" color="bg-indigo-500" delay={900} />
+                  <WorkflowNode icon={Shield} title="Compliance Reports" subtitle="Regulatory adherence" color="bg-indigo-500" delay={950} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
