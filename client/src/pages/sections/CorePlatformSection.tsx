@@ -21,14 +21,11 @@ import {
   SiHilton,
   SiLyft,
   SiTripadvisor,
-  SiBookingdotcom,
   SiAirbnb,
-  SiIhg,
   SiAccenture,
   SiAmazon,
   SiApple,
   SiGoogle,
-  SiBing,
   SiZoom
 } from "react-icons/si";
 
@@ -351,11 +348,11 @@ export const CorePlatformSection = (): JSX.Element => {
                 color="bg-amber-500"
                 items={[
                   { name: "Expedia", icon: SiExpedia, iconColor: "#FFCB08" },
-                  { name: "Booking.com", icon: SiBookingdotcom, iconColor: "#003580" },
+                  { name: "Booking.com", icon: Hotel, iconColor: "#003580" },
                   { name: "Hotels.com", icon: Hotel, iconColor: "#D32F2F" },
                   { name: "Marriott", icon: SiMarriott, iconColor: "#A4122D" },
                   { name: "Hilton", icon: SiHilton, iconColor: "#0057A0" },
-                  { name: "IHG", icon: SiIhg, iconColor: "#5D3277" },
+                  { name: "IHG", icon: Hotel, iconColor: "#5D3277" },
                   { name: "Airbnb", icon: SiAirbnb, iconColor: "#FF5A5F" },
                   { name: "Sabre", icon: Plane, iconColor: "#E31E24" },
                   { name: "Amadeus", icon: Plane, iconColor: "#1B69BC" }
@@ -422,7 +419,7 @@ export const CorePlatformSection = (): JSX.Element => {
                 items={[
                   { name: "Google Travel", icon: SiGoogle, iconColor: "#4285F4" },
                   { name: "Apple Maps", icon: SiApple, iconColor: "#000000" },
-                  { name: "Bing Travel", icon: SiBing, iconColor: "#008373" },
+                  { name: "Bing Travel", icon: Globe, iconColor: "#008373" },
                   { name: "Amazon Travel", icon: SiAmazon, iconColor: "#FF9900" },
                   { name: "Accenture", icon: SiAccenture, iconColor: "#A100FF" },
                   { name: "Zoom Meetings", icon: SiZoom, iconColor: "#2D8CFF" }
